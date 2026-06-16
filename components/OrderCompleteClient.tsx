@@ -57,14 +57,14 @@ export default function OrderCompleteClient() {
           </div>
 
           <div className="flex items-start gap-3">
-            <div className="w-8 h-8 bg-red-50 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-              <svg className="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-8 h-8 bg-purple-50 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg className="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
             <div>
               <p className="text-sm font-medium text-gray-700">使用方式</p>
-              <p className="text-sm text-gray-500">入住前請致電飯店預約，並出示 Email 中的 QR Code 核銷</p>
+              <p className="text-sm text-gray-500">入住前請致電民宿預約，並出示 Email 中的 QR Code 核銷</p>
             </div>
           </div>
         </div>

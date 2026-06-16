@@ -24,7 +24,7 @@ export const vouchers: Voucher[] = [
       "W Hotel Taipei 位於台北信義計畫區核心，步行可達101大樓。房間設計前衛時尚，提供頂級寢具與備品，讓您享受最高規格的住宿體驗。",
     usageInstructions: [
       "購買後將收到電子票券至您的Email",
-      "入住前請提前致電飯店訂房（須於效期內完成訂房）",
+      "入住前請提前致電民宿訂房（須於活動期間內完成訂房）",
       "訂房時請告知使用住宿券",
       "入住當天出示票券QR Code給前台人員核銷",
     ],
@@ -38,10 +38,10 @@ export const vouchers: Voucher[] = [
   },
   {
     id: "2",
-    title: "台中七期亞緻大飯店 精緻雙人住宿",
-    subtitle: "台中最高樓層飯店，俯瞰全城夜景",
+    title: "台中七期亞緻大民宿 精緻雙人住宿",
+    subtitle: "台中最高樓層民宿，俯瞰全城夜景",
     city: "台中",
-    hotelName: "亞緻大飯店",
+    hotelName: "亞緻大民宿",
     originalPrice: 8800,
     salePrice: 4500,
     discountPercent: 49,
@@ -56,10 +56,10 @@ export const vouchers: Voucher[] = [
     reviewCount: 215,
     tags: ["夜景房", "七期商圈", "含早餐"],
     description:
-      "亞緻大飯店位於台中七期重劃區，是台中指標性地標。頂樓景觀餐廳可360度眺望台中市景，夜晚燈火通明格外迷人。",
+      "亞緻大民宿位於台中七期重劃區，是台中指標性地標。頂樓景觀餐廳可360度眺望台中市景，夜晚燈火通明格外迷人。",
     usageInstructions: [
       "購買後將收到電子票券至您的Email",
-      "入住前請提前致電飯店訂房",
+      "入住前請提前致電民宿訂房",
       "訂房時請告知使用住宿券",
       "入住當天出示票券QR Code給前台人員核銷",
     ],
@@ -68,7 +68,7 @@ export const vouchers: Voucher[] = [
       "本券不適用連續假期（春節、五一、國慶等）",
       "需提前至少2天電話預約",
       "不可退換、轉讓",
-      "逾效期自動失效",
+      "逾活動期間自動失效",
     ],
   },
   {
@@ -108,10 +108,10 @@ export const vouchers: Voucher[] = [
   },
   {
     id: "4",
-    title: "花蓮理想大地渡假飯店 歐風莊園住宿",
+    title: "花蓮理想大地渡假民宿 歐風莊園住宿",
     subtitle: "仿地中海建築群，花蓮最夢幻渡假村",
     city: "花蓮",
-    hotelName: "理想大地渡假飯店",
+    hotelName: "理想大地渡假民宿",
     originalPrice: 10500,
     salePrice: 5990,
     discountPercent: 43,
@@ -126,19 +126,19 @@ export const vouchers: Voucher[] = [
     reviewCount: 189,
     tags: ["歐式莊園", "溫水泳池", "含早餐", "親子友善"],
     description:
-      "理想大地仿地中海建築風格，坐落於花蓮壽豐鄉，四周青山環繞。飯店內設有多座泳池、SPA中心、網球場，是花東最完善的渡假村。",
+      "理想大地仿地中海建築風格，坐落於花蓮壽豐鄉，四周青山環繞。民宿內設有多座泳池、SPA中心、網球場，是花東最完善的渡假村。",
     usageInstructions: [
       "購買後將收到電子票券至您的Email",
-      "請至飯店官網會員系統預約訂房",
+      "請至民宿官網會員系統預約訂房",
       "預約時輸入票券號碼",
       "入住當天憑票券辦理入住",
     ],
-    includes: ["雙人歐式早餐 x1", "溫水泳池使用券 x2", "飯店設施使用（網球場、健身房）"],
+    includes: ["雙人歐式早餐 x1", "溫水泳池使用券 x2", "民宿設施使用（網球場、健身房）"],
     notes: [
       "例假日（六、日及國定假日）需加收假日費用NT$500",
       "需提前至少3天預約",
       "攜帶寵物需提前告知並付清潔費",
-      "效期內不限平假日（需加收假日費）",
+      "活動期間內不限平假日（需加收假日費）",
     ],
   },
   {
@@ -151,8 +151,8 @@ export const vouchers: Voucher[] = [
     salePrice: 5200,
     discountPercent: 47,
     images: [
-      "https://images.unsplash.com/photo-1540541338537-b9d6a3c3e0e7?w=800&q=80",
-      "https://images.unsplash.com/photo-1602002418082-dd6b2d4bbf88?w=800&q=80",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80",
       "https://images.unsplash.com/photo-1455587734955-081b22074882?w=800&q=80",
     ],
     validUntil: "2026-12-31",

@@ -29,7 +29,7 @@ export default function FilterBar({ selectedCity, selectedSort, onCityChange, on
               onClick={() => onCityChange(city)}
               className={`flex-shrink-0 px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
                 selectedCity === city
-                  ? "bg-red-500 text-white"
+                  ? "bg-purple-600 text-white"
                   : "bg-gray-100 text-gray-600 hover:bg-gray-200"
               }`}
             >
@@ -44,7 +44,7 @@ export default function FilterBar({ selectedCity, selectedSort, onCityChange, on
           <select
             value={selectedSort}
             onChange={(e) => onSortChange(e.target.value)}
-            className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-400"
+            className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-400"
           >
             {sortOptions.map((opt) => (
               <option key={opt.value} value={opt.value}>

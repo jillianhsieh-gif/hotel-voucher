@@ -54,7 +54,7 @@ export default function VoucherListClient({ initialVouchers }: Props) {
           {selectedCity !== "全部" && (
             <span>
               ，地區：
-              <span className="text-red-500 font-medium">{selectedCity}</span>
+              <span className="text-purple-600 font-medium">{selectedCity}</span>
             </span>
           )}
         </p>
@@ -65,7 +65,7 @@ export default function VoucherListClient({ initialVouchers }: Props) {
             <p className="text-lg">此地區目前沒有住宿券</p>
             <button
               onClick={() => setSelectedCity("全部")}
-              className="mt-4 text-red-500 underline text-sm"
+              className="mt-4 text-purple-600 underline text-sm"
             >
               查看全部住宿券
             </button>

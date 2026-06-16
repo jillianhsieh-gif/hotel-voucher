@@ -28,7 +28,7 @@ export default function ProductPage({ params }: Props) {
     <div className="max-w-3xl mx-auto px-4 py-6 space-y-6">
       {/* Breadcrumb */}
       <nav className="text-sm text-gray-400 flex items-center gap-1">
-        <Link href="/" className="hover:text-red-500 transition-colors">首頁</Link>
+        <Link href="/" className="hover:text-purple-600 transition-colors">首頁</Link>
         <span>›</span>
         <span className="text-gray-600">{voucher.city}</span>
         <span>›</span>
@@ -41,7 +41,7 @@ export default function ProductPage({ params }: Props) {
       {/* Title & meta */}
       <div className="space-y-3">
         <div className="flex flex-wrap gap-2">
-          <span className="badge bg-red-50 text-red-500">{voucher.city}</span>
+          <span className="badge bg-purple-50 text-purple-600">{voucher.city}</span>
           {voucher.tags.map((tag) => (
             <span key={tag} className="badge bg-gray-100 text-gray-500">{tag}</span>
           ))}
@@ -67,22 +67,22 @@ export default function ProductPage({ params }: Props) {
       </div>
 
       {/* Price card */}
-      <div className="bg-red-50 border border-red-100 rounded-xl p-5 space-y-3">
+      <div className="bg-purple-50 border border-purple-100 rounded-xl p-5 space-y-3">
         <div className="flex items-baseline gap-3">
-          <span className="text-3xl font-bold text-red-500">
+          <span className="text-3xl font-bold text-purple-600">
             NT$ {voucher.salePrice.toLocaleString()}
           </span>
           <span className="text-gray-400 line-through text-lg">
             {voucher.originalPrice.toLocaleString()}
           </span>
-          <span className="bg-red-500 text-white text-sm font-bold px-2 py-0.5 rounded-md">
+          <span className="bg-purple-600 text-white text-sm font-bold px-2 py-0.5 rounded-md">
             省 {voucher.discountPercent}%
           </span>
         </div>
-        <p className="text-sm text-red-600 font-medium">
+        <p className="text-sm text-purple-700 font-medium">
           立省 NT$ {savings.toLocaleString()}！限量優惠，售完為止
         </p>
-        <p className="text-sm text-gray-500">效期至 {voucher.validUntil}</p>
+        <p className="text-sm text-gray-500">活動期間至 {voucher.validUntil}</p>
 
         {/* Buy button — client component */}
         <BuyButton voucherId={voucher.id} />
@@ -90,15 +90,15 @@ export default function ProductPage({ params }: Props) {
 
       {/* Description */}
       <section className="space-y-2">
-        <h2 className="text-lg font-bold text-gray-800 border-l-4 border-red-500 pl-3">
-          飯店介紹
+        <h2 className="text-lg font-bold text-gray-800 border-l-4 border-purple-600 pl-3">
+          民宿介紹
         </h2>
         <p className="text-gray-600 leading-relaxed">{voucher.description}</p>
       </section>
 
       {/* Includes */}
       <section className="space-y-2">
-        <h2 className="text-lg font-bold text-gray-800 border-l-4 border-red-500 pl-3">
+        <h2 className="text-lg font-bold text-gray-800 border-l-4 border-purple-600 pl-3">
           包含內容
         </h2>
         <ul className="space-y-1.5">
@@ -113,13 +113,13 @@ export default function ProductPage({ params }: Props) {
 
       {/* Usage instructions */}
       <section className="space-y-2">
-        <h2 className="text-lg font-bold text-gray-800 border-l-4 border-red-500 pl-3">
+        <h2 className="text-lg font-bold text-gray-800 border-l-4 border-purple-600 pl-3">
           使用方式
         </h2>
         <ol className="space-y-2">
           {voucher.usageInstructions.map((step, i) => (
             <li key={i} className="flex gap-3 text-gray-600">
-              <span className="flex-shrink-0 w-6 h-6 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center">
+              <span className="flex-shrink-0 w-6 h-6 bg-purple-600 text-white text-xs font-bold rounded-full flex items-center justify-center">
                 {i + 1}
               </span>
               {step}
@@ -130,7 +130,7 @@ export default function ProductPage({ params }: Props) {
 
       {/* Notes */}
       <section className="space-y-2">
-        <h2 className="text-lg font-bold text-gray-800 border-l-4 border-red-500 pl-3">
+        <h2 className="text-lg font-bold text-gray-800 border-l-4 border-purple-600 pl-3">
           注意事項
         </h2>
         <ul className="space-y-1.5 bg-gray-50 rounded-xl p-4">
@@ -147,7 +147,7 @@ export default function ProductPage({ params }: Props) {
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 md:hidden z-50">
         <div className="flex items-center justify-between mb-2">
           <span className="text-sm text-gray-500">優惠價</span>
-          <span className="text-xl font-bold text-red-500">
+          <span className="text-xl font-bold text-purple-600">
             NT$ {voucher.salePrice.toLocaleString()}
           </span>
         </div>

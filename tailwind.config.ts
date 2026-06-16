@@ -10,15 +10,11 @@ const config: Config = {
     extend: {
       colors: {
         primary: {
-          50: "#fef2f2",
-          100: "#fee2e2",
-          500: "#ef4444",
-          600: "#dc2626",
-          700: "#b91c1c",
-        },
-        gomaji: {
-          red: "#e8192c",
-          orange: "#f97316",
+          50: "#faf5ff",
+          100: "#f3e8ff",
+          500: "#a855f7",
+          600: "#9333ea",
+          700: "#7e22ce",
         },
       },
     },

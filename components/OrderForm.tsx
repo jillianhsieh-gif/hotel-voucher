@@ -24,7 +24,7 @@ export default function OrderForm() {
     return (
       <div className="text-center py-20 text-gray-400">
         <p>找不到商品</p>
-        <Link href="/" className="text-red-500 underline mt-2 block">回首頁</Link>
+        <Link href="/" className="text-purple-600 underline mt-2 block">回首頁</Link>
       </div>
     );
   }
@@ -85,8 +85,8 @@ export default function OrderForm() {
         </div>
         <div className="flex-1 min-w-0">
           <p className="font-medium text-gray-800 text-sm line-clamp-2">{voucher.title}</p>
-          <p className="text-red-500 font-bold mt-1">NT$ {voucher.salePrice.toLocaleString()}</p>
-          <p className="text-xs text-gray-400 mt-0.5">效期至 {voucher.validUntil}</p>
+          <p className="text-purple-600 font-bold mt-1">NT$ {voucher.salePrice.toLocaleString()}</p>
+          <p className="text-xs text-gray-400 mt-0.5">活動期間至 {voucher.validUntil}</p>
         </div>
       </div>
 
@@ -97,7 +97,7 @@ export default function OrderForm() {
           <button
             type="button"
             onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-            className="w-10 h-10 rounded-full border-2 border-gray-300 text-xl font-bold text-gray-600 hover:border-red-400 hover:text-red-500 transition-colors flex items-center justify-center"
+            className="w-10 h-10 rounded-full border-2 border-gray-300 text-xl font-bold text-gray-600 hover:border-purple-400 hover:text-purple-600 transition-colors flex items-center justify-center"
           >
             −
           </button>
@@ -105,7 +105,7 @@ export default function OrderForm() {
           <button
             type="button"
             onClick={() => setQuantity((q) => Math.min(10, q + 1))}
-            className="w-10 h-10 rounded-full border-2 border-gray-300 text-xl font-bold text-gray-600 hover:border-red-400 hover:text-red-500 transition-colors flex items-center justify-center"
+            className="w-10 h-10 rounded-full border-2 border-gray-300 text-xl font-bold text-gray-600 hover:border-purple-400 hover:text-purple-600 transition-colors flex items-center justify-center"
           >
             ＋
           </button>
@@ -119,7 +119,7 @@ export default function OrderForm() {
 
         <div className="space-y-1">
           <label className="text-sm font-medium text-gray-700">
-            姓名 <span className="text-red-500">*</span>
+            姓名 <span className="text-purple-600">*</span>
           </label>
           <input
             type="text"
@@ -127,15 +127,15 @@ export default function OrderForm() {
             onChange={(e) => { setForm({ ...form, name: e.target.value }); setErrors({ ...errors, name: "" }); }}
             placeholder="請輸入真實姓名"
             className={`w-full border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 transition-colors ${
-              errors.name ? "border-red-400 focus:ring-red-300" : "border-gray-300 focus:ring-red-400"
+              errors.name ? "border-purple-400 focus:ring-purple-300" : "border-gray-300 focus:ring-purple-400"
             }`}
           />
-          {errors.name && <p className="text-red-500 text-xs">{errors.name}</p>}
+          {errors.name && <p className="text-purple-600 text-xs">{errors.name}</p>}
         </div>
 
         <div className="space-y-1">
           <label className="text-sm font-medium text-gray-700">
-            手機號碼 <span className="text-red-500">*</span>
+            手機號碼 <span className="text-purple-600">*</span>
           </label>
           <input
             type="tel"
@@ -144,15 +144,15 @@ export default function OrderForm() {
             placeholder="09xxxxxxxx"
             maxLength={10}
             className={`w-full border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 transition-colors ${
-              errors.phone ? "border-red-400 focus:ring-red-300" : "border-gray-300 focus:ring-red-400"
+              errors.phone ? "border-purple-400 focus:ring-purple-300" : "border-gray-300 focus:ring-purple-400"
             }`}
           />
-          {errors.phone && <p className="text-red-500 text-xs">{errors.phone}</p>}
+          {errors.phone && <p className="text-purple-600 text-xs">{errors.phone}</p>}
         </div>
 
         <div className="space-y-1">
           <label className="text-sm font-medium text-gray-700">
-            Email <span className="text-red-500">*</span>
+            Email <span className="text-purple-600">*</span>
           </label>
           <input
             type="email"
@@ -160,10 +160,10 @@ export default function OrderForm() {
             onChange={(e) => { setForm({ ...form, email: e.target.value }); setErrors({ ...errors, email: "" }); }}
             placeholder="ticket@example.com"
             className={`w-full border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 transition-colors ${
-              errors.email ? "border-red-400 focus:ring-red-300" : "border-gray-300 focus:ring-red-400"
+              errors.email ? "border-purple-400 focus:ring-purple-300" : "border-gray-300 focus:ring-purple-400"
             }`}
           />
-          {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
+          {errors.email && <p className="text-purple-600 text-xs">{errors.email}</p>}
           <p className="text-xs text-gray-400">電子票券將寄送至此 Email</p>
         </div>
       </div>
@@ -181,16 +181,16 @@ export default function OrderForm() {
         </div>
         <div className="border-t border-gray-200 pt-2 mt-2 flex justify-between font-bold text-gray-800">
           <span>應付金額</span>
-          <span className="text-red-500 text-xl">NT$ {total.toLocaleString()}</span>
+          <span className="text-purple-600 text-xl">NT$ {total.toLocaleString()}</span>
         </div>
       </div>
 
       {/* Terms */}
       <p className="text-xs text-gray-400 text-center">
         按下確認付款即表示您同意本站
-        <span className="text-red-400 cursor-pointer"> 服務條款 </span>
+        <span className="text-purple-400 cursor-pointer"> 服務條款 </span>
         與
-        <span className="text-red-400 cursor-pointer"> 隱私政策</span>
+        <span className="text-purple-400 cursor-pointer"> 隱私政策</span>
       </p>
 
       {/* Submit */}

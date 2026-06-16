@@ -20,7 +20,7 @@ export default function VoucherCard({ voucher }: Props) {
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
           {/* Discount badge */}
-          <div className="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-md">
+          <div className="absolute top-3 left-3 bg-purple-600 text-white text-xs font-bold px-2 py-1 rounded-md">
             省 {voucher.discountPercent}%
           </div>
           {/* Sold count */}
@@ -33,7 +33,7 @@ export default function VoucherCard({ voucher }: Props) {
         <div className="p-4 space-y-2">
           {/* City tag */}
           <div className="flex items-center gap-2">
-            <span className="badge bg-red-50 text-red-500">{voucher.city}</span>
+            <span className="badge bg-purple-50 text-purple-600">{voucher.city}</span>
             {voucher.tags.slice(0, 2).map((tag) => (
               <span key={tag} className="badge bg-gray-100 text-gray-500">
                 {tag}
@@ -42,7 +42,7 @@ export default function VoucherCard({ voucher }: Props) {
           </div>
 
           {/* Title */}
-          <h3 className="font-bold text-gray-800 text-base leading-snug line-clamp-2 group-hover:text-red-500 transition-colors">
+          <h3 className="font-bold text-gray-800 text-base leading-snug line-clamp-2 group-hover:text-purple-600 transition-colors">
             {voucher.title}
           </h3>
 
@@ -57,7 +57,7 @@ export default function VoucherCard({ voucher }: Props) {
 
           {/* Price */}
           <div className="pt-1 flex items-baseline gap-2">
-            <span className="text-2xl font-bold text-red-500">
+            <span className="text-2xl font-bold text-purple-600">
               NT$ {voucher.salePrice.toLocaleString()}
             </span>
             <span className="text-sm text-gray-400 line-through">
@@ -66,7 +66,7 @@ export default function VoucherCard({ voucher }: Props) {
           </div>
 
           {/* Valid until */}
-          <p className="text-xs text-gray-400">效期至 {voucher.validUntil}</p>
+          <p className="text-xs text-gray-400">活動期間至 {voucher.validUntil}</p>
         </div>
       </div>
     </Link>

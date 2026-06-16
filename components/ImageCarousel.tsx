@@ -61,7 +61,7 @@ export default function ImageCarousel({ images, alt }: Props) {
               key={i}
               onClick={() => setCurrent(i)}
               className={`relative flex-shrink-0 w-20 h-14 rounded-lg overflow-hidden border-2 transition-colors ${
-                i === current ? "border-red-500" : "border-transparent"
+                i === current ? "border-purple-600" : "border-transparent"
               }`}
             >
               <Image src={src} alt={`縮圖 ${i + 1}`} fill className="object-cover" sizes="80px" />

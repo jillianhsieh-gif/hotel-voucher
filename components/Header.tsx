@@ -17,7 +17,7 @@ export default function Header() {
   }
 
   return (
-    <header className="bg-red-500 text-white sticky top-0 z-50 shadow-md">
+    <header className="bg-purple-600 text-white sticky top-0 z-50 shadow-md">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex items-center justify-between h-14">
           {/* Logo */}
@@ -28,17 +28,17 @@ export default function Header() {
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-5 text-sm font-medium">
-            <Link href="/" className="hover:text-red-100 transition-colors">
+            <Link href="/" className="hover:text-purple-100 transition-colors">
               住宿券
             </Link>
             {user ? (
               <>
-                <Link href="/my-orders" className="hover:text-red-100 transition-colors">
+                <Link href="/my-orders" className="hover:text-purple-100 transition-colors">
                   我的訂單
                 </Link>
                 {/* User info + logout */}
-                <div className="flex items-center gap-2 bg-red-600/60 rounded-full pl-3 pr-1 py-1">
-                  <span className="text-sm text-red-100 max-w-[120px] truncate">
+                <div className="flex items-center gap-2 bg-purple-700/60 rounded-full pl-3 pr-1 py-1">
+                  <span className="text-sm text-purple-100 max-w-[120px] truncate">
                     👤 {user.name}
                   </span>
                   <button
@@ -52,7 +52,7 @@ export default function Header() {
             ) : (
               <Link
                 href="/login"
-                className="bg-white text-red-500 hover:bg-red-50 font-bold px-4 py-1.5 rounded-full transition-colors text-sm"
+                className="bg-white text-purple-600 hover:bg-purple-50 font-bold px-4 py-1.5 rounded-full transition-colors text-sm"
               >
                 登入
               </Link>
@@ -61,7 +61,7 @@ export default function Header() {
 
           {/* Mobile menu button */}
           <button
-            className="md:hidden p-2 rounded-md hover:bg-red-600 transition-colors"
+            className="md:hidden p-2 rounded-md hover:bg-purple-700 transition-colors"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="選單"
           >
@@ -77,17 +77,17 @@ export default function Header() {
 
         {/* Mobile menu */}
         {menuOpen && (
-          <div className="md:hidden border-t border-red-400 py-3 flex flex-col gap-3 text-sm font-medium">
-            <Link href="/" className="hover:text-red-100" onClick={() => setMenuOpen(false)}>
+          <div className="md:hidden border-t border-purple-400 py-3 flex flex-col gap-3 text-sm font-medium">
+            <Link href="/" className="hover:text-purple-100" onClick={() => setMenuOpen(false)}>
               住宿券
             </Link>
             {user ? (
               <>
-                <Link href="/my-orders" className="hover:text-red-100" onClick={() => setMenuOpen(false)}>
+                <Link href="/my-orders" className="hover:text-purple-100" onClick={() => setMenuOpen(false)}>
                   我的訂單
                 </Link>
-                <div className="flex items-center justify-between border-t border-red-400 pt-3">
-                  <span className="text-red-100 text-xs">👤 {user.name}</span>
+                <div className="flex items-center justify-between border-t border-purple-400 pt-3">
+                  <span className="text-purple-100 text-xs">👤 {user.name}</span>
                   <button
                     onClick={handleLogout}
                     className="text-xs bg-white/20 hover:bg-white/30 text-white px-3 py-1.5 rounded-full transition-colors"
@@ -99,7 +99,7 @@ export default function Header() {
             ) : (
               <Link
                 href="/login"
-                className="text-white font-bold hover:text-red-100"
+                className="text-white font-bold hover:text-purple-100"
                 onClick={() => setMenuOpen(false)}
               >
                 登入

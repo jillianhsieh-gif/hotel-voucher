@@ -5,8 +5,8 @@ import Footer from "@/components/Footer";
 import { AuthProvider } from "@/lib/AuthContext";
 
 export const metadata: Metadata = {
-  title: "住宿券優惠 | 最低5折入住精選飯店",
-  description: "精選台灣各地優質飯店住宿券，最低5折起，立即購買享受頂級住宿體驗。",
+  title: "住宿券優惠 | 最低5折入住精選民宿",
+  description: "精選台灣各地優質民宿住宿券，最低5折起，立即購買享受頂級住宿體驗。",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

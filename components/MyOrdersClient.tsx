@@ -89,7 +89,7 @@ export default function MyOrdersClient() {
             </div>
             <div className="flex justify-between font-bold text-gray-800 pt-2 border-t border-gray-100 mt-2">
               <span>實付金額</span>
-              <span className="text-red-500 text-base">NT$ {order.totalPrice.toLocaleString()}</span>
+              <span className="text-purple-600 text-base">NT$ {order.totalPrice.toLocaleString()}</span>
             </div>
           </div>
         </div>

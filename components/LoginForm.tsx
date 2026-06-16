@@ -44,7 +44,7 @@ export default function LoginForm() {
     <form onSubmit={handleSubmit} className="space-y-4" noValidate>
       {/* General error */}
       {errors.general && (
-        <div className="bg-red-50 border border-red-200 text-red-600 text-sm px-4 py-3 rounded-lg">
+        <div className="bg-purple-50 border border-purple-200 text-purple-700 text-sm px-4 py-3 rounded-lg">
           {errors.general}
         </div>
       )}
@@ -61,10 +61,10 @@ export default function LoginForm() {
           placeholder="your@email.com"
           autoComplete="email"
           className={`w-full border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 transition-colors ${
-            errors.email ? "border-red-400 focus:ring-red-300" : "border-gray-300 focus:ring-red-400"
+            errors.email ? "border-purple-400 focus:ring-purple-300" : "border-gray-300 focus:ring-purple-400"
           }`}
         />
-        {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
+        {errors.email && <p className="text-purple-600 text-xs">{errors.email}</p>}
       </div>
 
       {/* Password */}
@@ -80,7 +80,7 @@ export default function LoginForm() {
             placeholder="請輸入密碼"
             autoComplete="current-password"
             className={`w-full border rounded-lg px-4 py-3 pr-11 text-sm focus:outline-none focus:ring-2 transition-colors ${
-              errors.password ? "border-red-400 focus:ring-red-300" : "border-gray-300 focus:ring-red-400"
+              errors.password ? "border-purple-400 focus:ring-purple-300" : "border-gray-300 focus:ring-purple-400"
             }`}
           />
           <button
@@ -100,7 +100,7 @@ export default function LoginForm() {
             )}
           </button>
         </div>
-        {errors.password && <p className="text-red-500 text-xs">{errors.password}</p>}
+        {errors.password && <p className="text-purple-600 text-xs">{errors.password}</p>}
       </div>
 
       {/* Submit */}
