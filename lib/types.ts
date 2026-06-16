@@ -1,3 +1,9 @@
+export interface User {
+  name: string;
+  email: string;
+  token: string;
+}
+
 export interface Voucher {
   id: string;
   title: string;

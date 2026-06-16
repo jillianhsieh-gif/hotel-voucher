@@ -2,9 +2,19 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useAuth } from "@/lib/AuthContext";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { user, logout } = useAuth();
+  const router = useRouter();
+
+  function handleLogout() {
+    logout();
+    setMenuOpen(false);
+    router.push("/");
+  }
 
   return (
     <header className="bg-red-500 text-white sticky top-0 z-50 shadow-md">
@@ -17,13 +27,36 @@ export default function Header() {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+          <nav className="hidden md:flex items-center gap-5 text-sm font-medium">
             <Link href="/" className="hover:text-red-100 transition-colors">
               住宿券
             </Link>
-            <Link href="/my-orders" className="hover:text-red-100 transition-colors">
-              我的訂單
-            </Link>
+            {user ? (
+              <>
+                <Link href="/my-orders" className="hover:text-red-100 transition-colors">
+                  我的訂單
+                </Link>
+                {/* User info + logout */}
+                <div className="flex items-center gap-2 bg-red-600/60 rounded-full pl-3 pr-1 py-1">
+                  <span className="text-sm text-red-100 max-w-[120px] truncate">
+                    👤 {user.name}
+                  </span>
+                  <button
+                    onClick={handleLogout}
+                    className="text-xs bg-white/20 hover:bg-white/30 text-white px-2 py-1 rounded-full transition-colors"
+                  >
+                    登出
+                  </button>
+                </div>
+              </>
+            ) : (
+              <Link
+                href="/login"
+                className="bg-white text-red-500 hover:bg-red-50 font-bold px-4 py-1.5 rounded-full transition-colors text-sm"
+              >
+                登入
+              </Link>
+            )}
           </nav>
 
           {/* Mobile menu button */}
@@ -48,9 +81,30 @@ export default function Header() {
             <Link href="/" className="hover:text-red-100" onClick={() => setMenuOpen(false)}>
               住宿券
             </Link>
-            <Link href="/my-orders" className="hover:text-red-100" onClick={() => setMenuOpen(false)}>
-              我的訂單
-            </Link>
+            {user ? (
+              <>
+                <Link href="/my-orders" className="hover:text-red-100" onClick={() => setMenuOpen(false)}>
+                  我的訂單
+                </Link>
+                <div className="flex items-center justify-between border-t border-red-400 pt-3">
+                  <span className="text-red-100 text-xs">👤 {user.name}</span>
+                  <button
+                    onClick={handleLogout}
+                    className="text-xs bg-white/20 hover:bg-white/30 text-white px-3 py-1.5 rounded-full transition-colors"
+                  >
+                    登出
+                  </button>
+                </div>
+              </>
+            ) : (
+              <Link
+                href="/login"
+                className="text-white font-bold hover:text-red-100"
+                onClick={() => setMenuOpen(false)}
+              >
+                登入
+              </Link>
+            )}
           </div>
         )}
       </div>
