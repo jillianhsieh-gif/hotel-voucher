@@ -21,7 +21,7 @@ export default function Header() {
             <Link href="/" className="hover:text-red-100 transition-colors">
               住宿券
             </Link>
-            <Link href="/order" className="hover:text-red-100 transition-colors">
+            <Link href="/my-orders" className="hover:text-red-100 transition-colors">
               我的訂單
             </Link>
           </nav>
@@ -48,7 +48,7 @@ export default function Header() {
             <Link href="/" className="hover:text-red-100" onClick={() => setMenuOpen(false)}>
               住宿券
             </Link>
-            <Link href="/order" className="hover:text-red-100" onClick={() => setMenuOpen(false)}>
+            <Link href="/my-orders" className="hover:text-red-100" onClick={() => setMenuOpen(false)}>
               我的訂單
             </Link>
           </div>

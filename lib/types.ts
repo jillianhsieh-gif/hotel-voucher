@@ -31,3 +31,16 @@ export interface OrderForm {
   quantity: number;
   voucherId: string;
 }
+
+export interface Order {
+  orderId: string;
+  voucherId: string;
+  voucherTitle: string;
+  voucherImage: string;
+  name: string;
+  phone: string;
+  email: string;
+  quantity: number;
+  totalPrice: number;
+  createdAt: string; // ISO string
+}

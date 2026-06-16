@@ -5,6 +5,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { getVoucherById } from "@/lib/mockData";
+import type { Order } from "@/lib/types";
+
+const ORDERS_KEY = "hotel_voucher_orders";
 
 export default function OrderForm() {
   const router = useRouter();
@@ -46,6 +49,23 @@ export default function OrderForm() {
     await new Promise((r) => setTimeout(r, 1200));
 
     const orderId = "ORD" + Date.now().toString().slice(-8);
+
+    // 儲存訂單至 localStorage
+    const newOrder: Order = {
+      orderId,
+      voucherId: voucher.id,
+      voucherTitle: voucher.title,
+      voucherImage: voucher.images[0],
+      name: form.name,
+      phone: form.phone,
+      email: form.email,
+      quantity,
+      totalPrice: voucher.salePrice * quantity,
+      createdAt: new Date().toISOString(),
+    };
+    const existing: Order[] = JSON.parse(localStorage.getItem(ORDERS_KEY) ?? "[]");
+    localStorage.setItem(ORDERS_KEY, JSON.stringify([newOrder, ...existing]));
+
     router.push(`/order/complete?orderId=${orderId}&email=${encodeURIComponent(form.email)}`);
   }
 
