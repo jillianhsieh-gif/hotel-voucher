@@ -5,18 +5,31 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { getVoucherById } from "@/lib/mockData";
-import type { Order } from "@/lib/types";
+import { useAuth } from "@/lib/AuthContext";
+import PaymentSelector from "./PaymentSelector";
+import type { Order, PaymentMethod } from "@/lib/types";
 
 const ORDERS_KEY = "hotel_voucher_orders";
 
-export default function OrderForm() {
+interface Props {
+  isGuest: boolean;
+}
+
+export default function OrderForm({ isGuest }: Props) {
+  const { user } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
   const voucherId = searchParams.get("id") ?? "1";
   const voucher = getVoucherById(voucherId);
 
-  const [form, setForm] = useState({ name: "", phone: "", email: "" });
+  const [form, setForm] = useState({
+    name: user?.name ?? "",
+    phone: "",
+    email: user?.email ?? "",
+  });
   const [quantity, setQuantity] = useState(1);
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod | null>(null);
+  const [creditCard, setCreditCard] = useState({ cardNumber: "", expiry: "", cvv: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
 
@@ -36,6 +49,13 @@ export default function OrderForm() {
     if (!form.name.trim()) e.name = "請填寫姓名";
     if (!/^09\d{8}$/.test(form.phone)) e.phone = "請填寫正確的手機號碼（09xxxxxxxx）";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "請填寫正確的 Email";
+    if (!paymentMethod) {
+      e.paymentMethod = "請選擇付款方式";
+    } else if (paymentMethod === "credit_card") {
+      if (creditCard.cardNumber.replace(/\s/g, "").length < 16) e.cardNumber = "請輸入完整卡號";
+      if (!/^\d{2}\/\d{2}$/.test(creditCard.expiry)) e.expiry = "請輸入正確格式 MM/YY";
+      if (creditCard.cvv.length < 3) e.cvv = "請輸入 CVV";
+    }
     return e;
   }
 
@@ -46,32 +66,56 @@ export default function OrderForm() {
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
     setSubmitting(true);
 
-    // Simulate API call
-    await new Promise((r) => setTimeout(r, 1200));
+    // Simulate payment processing
+    await new Promise((r) => setTimeout(r, 1400));
 
     const orderId = "ORD" + Date.now().toString().slice(-8);
+    const method = paymentMethod!;
 
-    // 儲存訂單至 localStorage
-    const newOrder: Order = {
-      orderId,
-      voucherId: voucher.id,
-      voucherTitle: voucher.title,
-      voucherImage: voucher.images[0],
-      name: form.name,
-      phone: form.phone,
-      email: form.email,
-      quantity,
-      totalPrice: voucher.salePrice * quantity,
-      createdAt: new Date().toISOString(),
-    };
-    const existing: Order[] = JSON.parse(localStorage.getItem(ORDERS_KEY) ?? "[]");
-    localStorage.setItem(ORDERS_KEY, JSON.stringify([newOrder, ...existing]));
+    // Only save to localStorage for logged-in members
+    if (!isGuest) {
+      const newOrder: Order = {
+        orderId,
+        voucherId: voucher.id,
+        voucherTitle: voucher.title,
+        voucherImage: voucher.images[0],
+        name: form.name,
+        phone: form.phone,
+        email: form.email,
+        quantity,
+        totalPrice: voucher.salePrice * quantity,
+        createdAt: new Date().toISOString(),
+        paymentMethod: method,
+      };
+      const existing: Order[] = JSON.parse(localStorage.getItem(ORDERS_KEY) ?? "[]");
+      localStorage.setItem(ORDERS_KEY, JSON.stringify([newOrder, ...existing]));
+    }
 
-    router.push(`/order/complete?orderId=${orderId}&email=${encodeURIComponent(form.email)}`);
+    const guestParam = isGuest ? "&guest=1" : "";
+    router.push(
+      `/order/complete?orderId=${orderId}&email=${encodeURIComponent(form.email)}&payment=${method}${guestParam}`
+    );
   }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+      {/* Guest banner */}
+      {isGuest && (
+        <div className="flex items-center gap-3 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-700">
+          <span className="text-lg">👤</span>
+          <p>
+            您正以訪客身份下單。
+            <Link
+              href={`/login?redirect=${encodeURIComponent(`/order?id=${voucherId}`)}`}
+              className="underline font-medium ml-1"
+            >
+              登入會員
+            </Link>
+            可自動帶入資料並保存訂單記錄。
+          </p>
+        </div>
+      )}
+
       {/* Voucher summary */}
       <div className="bg-white border border-gray-200 rounded-xl p-4 flex gap-4">
         <div className="relative w-24 h-18 flex-shrink-0 rounded-lg overflow-hidden">
@@ -115,7 +159,14 @@ export default function OrderForm() {
 
       {/* Personal info */}
       <div className="bg-white border border-gray-200 rounded-xl p-5 space-y-4">
-        <h2 className="font-bold text-gray-800">訂購人資料</h2>
+        <div className="flex items-center justify-between">
+          <h2 className="font-bold text-gray-800">訂購人資料</h2>
+          {!isGuest && user && (
+            <span className="text-xs text-purple-600 bg-purple-50 px-2 py-1 rounded-full">
+              ✓ 已自動帶入會員資料
+            </span>
+          )}
+        </div>
 
         <div className="space-y-1">
           <label className="text-sm font-medium text-gray-700">
@@ -168,6 +219,15 @@ export default function OrderForm() {
         </div>
       </div>
 
+      {/* Payment method */}
+      <PaymentSelector
+        selected={paymentMethod}
+        onSelect={(m) => { setPaymentMethod(m); setErrors({ ...errors, paymentMethod: "" }); }}
+        creditCard={creditCard}
+        onCreditCardChange={setCreditCard}
+        errors={errors}
+      />
+
       {/* Order summary */}
       <div className="bg-gray-50 rounded-xl p-5 space-y-2">
         <h2 className="font-bold text-gray-800 mb-3">訂單明細</h2>
@@ -205,7 +265,7 @@ export default function OrderForm() {
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
             </svg>
-            處理中...
+            付款處理中...
           </>
         ) : (
           `確認付款 NT$ ${total.toLocaleString()}`

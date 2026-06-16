@@ -38,6 +38,8 @@ export interface OrderForm {
   voucherId: string;
 }
 
+export type PaymentMethod = "apple_pay" | "line_pay" | "credit_card";
+
 export interface Order {
   orderId: string;
   voucherId: string;
@@ -49,4 +51,5 @@ export interface Order {
   quantity: number;
   totalPrice: number;
   createdAt: string; // ISO string
+  paymentMethod: PaymentMethod;
 }

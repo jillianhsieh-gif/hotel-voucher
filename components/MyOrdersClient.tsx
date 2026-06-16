@@ -3,21 +3,57 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useAuth } from "@/lib/AuthContext";
 import type { Order } from "@/lib/types";
 
 const ORDERS_KEY = "hotel_voucher_orders";
 
 export default function MyOrdersClient() {
+  const { user, loading } = useAuth();
   const [orders, setOrders] = useState<Order[]>([]);
-  const [loaded, setLoaded] = useState(false);
+  const [ordersLoaded, setOrdersLoaded] = useState(false);
 
   useEffect(() => {
+    if (!user) return;
     const stored = localStorage.getItem(ORDERS_KEY);
     setOrders(stored ? JSON.parse(stored) : []);
-    setLoaded(true);
-  }, []);
+    setOrdersLoaded(true);
+  }, [user]);
 
-  if (!loaded) {
+  // Auth still loading
+  if (loading) {
+    return <div className="text-center text-gray-400 py-20">載入中...</div>;
+  }
+
+  // Not logged in — show inline prompt
+  if (!user) {
+    return (
+      <div className="text-center py-20 space-y-5">
+        <p className="text-5xl">🔒</p>
+        <div className="space-y-1">
+          <p className="text-gray-700 font-medium text-lg">請先登入以查看訂單記錄</p>
+          <p className="text-gray-400 text-sm">訂單記錄僅供會員查看，訪客下單請至 Email 確認</p>
+        </div>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <Link
+            href="/login?redirect=/my-orders"
+            className="btn-primary w-auto px-10 inline-block"
+          >
+            會員登入
+          </Link>
+          <Link
+            href="/"
+            className="border border-gray-300 text-gray-600 font-medium py-3 px-8 rounded-lg hover:bg-gray-50 transition-colors inline-block"
+          >
+            回首頁
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  // Logged in but orders still loading from localStorage
+  if (!ordersLoaded) {
     return <div className="text-center text-gray-400 py-20">載入中...</div>;
   }
 
@@ -63,9 +99,7 @@ export default function MyOrdersClient() {
               <p className="font-medium text-gray-800 text-sm line-clamp-2 leading-snug">
                 {order.voucherTitle}
               </p>
-              <p className="text-xs text-gray-400 mt-1">
-                數量：{order.quantity} 張
-              </p>
+              <p className="text-xs text-gray-400 mt-1">數量：{order.quantity} 張</p>
             </div>
           </div>
 
