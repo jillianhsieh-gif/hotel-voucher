@@ -1,0 +1,161 @@
+import { getVoucherById, vouchers } from "@/lib/mockData";
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import ImageCarousel from "@/components/ImageCarousel";
+import BuyButton from "@/components/BuyButton";
+
+interface Props {
+  params: { id: string };
+}
+
+export function generateStaticParams() {
+  return vouchers.map((v) => ({ id: v.id }));
+}
+
+export async function generateMetadata({ params }: Props) {
+  const voucher = getVoucherById(params.id);
+  if (!voucher) return {};
+  return { title: `${voucher.title} | 住宿優惠券` };
+}
+
+export default function ProductPage({ params }: Props) {
+  const voucher = getVoucherById(params.id);
+  if (!voucher) notFound();
+
+  const savings = voucher.originalPrice - voucher.salePrice;
+
+  return (
+    <div className="max-w-3xl mx-auto px-4 py-6 space-y-6">
+      {/* Breadcrumb */}
+      <nav className="text-sm text-gray-400 flex items-center gap-1">
+        <Link href="/" className="hover:text-red-500 transition-colors">首頁</Link>
+        <span>›</span>
+        <span className="text-gray-600">{voucher.city}</span>
+        <span>›</span>
+        <span className="text-gray-800 line-clamp-1">{voucher.hotelName}</span>
+      </nav>
+
+      {/* Image carousel */}
+      <ImageCarousel images={voucher.images} alt={voucher.title} />
+
+      {/* Title & meta */}
+      <div className="space-y-3">
+        <div className="flex flex-wrap gap-2">
+          <span className="badge bg-red-50 text-red-500">{voucher.city}</span>
+          {voucher.tags.map((tag) => (
+            <span key={tag} className="badge bg-gray-100 text-gray-500">{tag}</span>
+          ))}
+        </div>
+
+        <h1 className="text-xl md:text-2xl font-bold text-gray-800 leading-snug">
+          {voucher.title}
+        </h1>
+        <p className="text-gray-500">{voucher.subtitle}</p>
+
+        {/* Rating */}
+        <div className="flex items-center gap-2 text-sm">
+          <div className="flex text-yellow-400">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <span key={i}>{i < Math.round(voucher.rating) ? "★" : "☆"}</span>
+            ))}
+          </div>
+          <span className="font-medium text-gray-700">{voucher.rating}</span>
+          <span className="text-gray-400">({voucher.reviewCount} 則評價)</span>
+          <span className="text-gray-300">|</span>
+          <span className="text-gray-400">已售 {voucher.soldCount.toLocaleString()} 張</span>
+        </div>
+      </div>
+
+      {/* Price card */}
+      <div className="bg-red-50 border border-red-100 rounded-xl p-5 space-y-3">
+        <div className="flex items-baseline gap-3">
+          <span className="text-3xl font-bold text-red-500">
+            NT$ {voucher.salePrice.toLocaleString()}
+          </span>
+          <span className="text-gray-400 line-through text-lg">
+            {voucher.originalPrice.toLocaleString()}
+          </span>
+          <span className="bg-red-500 text-white text-sm font-bold px-2 py-0.5 rounded-md">
+            省 {voucher.discountPercent}%
+          </span>
+        </div>
+        <p className="text-sm text-red-600 font-medium">
+          立省 NT$ {savings.toLocaleString()}！限量優惠，售完為止
+        </p>
+        <p className="text-sm text-gray-500">效期至 {voucher.validUntil}</p>
+
+        {/* Buy button — client component */}
+        <BuyButton voucherId={voucher.id} />
+      </div>
+
+      {/* Description */}
+      <section className="space-y-2">
+        <h2 className="text-lg font-bold text-gray-800 border-l-4 border-red-500 pl-3">
+          飯店介紹
+        </h2>
+        <p className="text-gray-600 leading-relaxed">{voucher.description}</p>
+      </section>
+
+      {/* Includes */}
+      <section className="space-y-2">
+        <h2 className="text-lg font-bold text-gray-800 border-l-4 border-red-500 pl-3">
+          包含內容
+        </h2>
+        <ul className="space-y-1.5">
+          {voucher.includes.map((item, i) => (
+            <li key={i} className="flex items-start gap-2 text-gray-600">
+              <span className="text-green-500 mt-0.5 flex-shrink-0">✓</span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* Usage instructions */}
+      <section className="space-y-2">
+        <h2 className="text-lg font-bold text-gray-800 border-l-4 border-red-500 pl-3">
+          使用方式
+        </h2>
+        <ol className="space-y-2">
+          {voucher.usageInstructions.map((step, i) => (
+            <li key={i} className="flex gap-3 text-gray-600">
+              <span className="flex-shrink-0 w-6 h-6 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center">
+                {i + 1}
+              </span>
+              {step}
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      {/* Notes */}
+      <section className="space-y-2">
+        <h2 className="text-lg font-bold text-gray-800 border-l-4 border-red-500 pl-3">
+          注意事項
+        </h2>
+        <ul className="space-y-1.5 bg-gray-50 rounded-xl p-4">
+          {voucher.notes.map((note, i) => (
+            <li key={i} className="flex items-start gap-2 text-gray-500 text-sm">
+              <span className="text-yellow-500 flex-shrink-0">!</span>
+              {note}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* Sticky bottom CTA on mobile */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 md:hidden z-50">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-sm text-gray-500">優惠價</span>
+          <span className="text-xl font-bold text-red-500">
+            NT$ {voucher.salePrice.toLocaleString()}
+          </span>
+        </div>
+        <BuyButton voucherId={voucher.id} />
+      </div>
+
+      {/* Spacer for mobile sticky bar */}
+      <div className="h-24 md:hidden" />
+    </div>
+  );
+}
