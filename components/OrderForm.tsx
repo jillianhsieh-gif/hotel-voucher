@@ -41,6 +41,7 @@ export default function OrderForm() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!voucher) return;
     const errs = validate();
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
     setSubmitting(true);
