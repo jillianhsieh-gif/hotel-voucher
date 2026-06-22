@@ -1,11 +1,11 @@
 "use client";
 
-import { cities } from "@/lib/mockData";
+import { regions } from "@/lib/mockData";
 
 interface Props {
-  selectedCity: string;
+  selectedRegion: string;
   selectedSort: string;
-  onCityChange: (city: string) => void;
+  onRegionChange: (region: string) => void;
   onSortChange: (sort: string) => void;
 }
 
@@ -15,25 +15,26 @@ const sortOptions = [
   { value: "price-desc", label: "價格高到低" },
   { value: "discount", label: "折扣最多" },
   { value: "popular", label: "最受歡迎" },
+  { value: "remaining", label: "剩餘張數少" },
 ];
 
-export default function FilterBar({ selectedCity, selectedSort, onCityChange, onSortChange }: Props) {
+export default function FilterBar({ selectedRegion, selectedSort, onRegionChange, onSortChange }: Props) {
   return (
     <div className="bg-white border-b border-gray-200 sticky top-14 z-40">
       <div className="max-w-6xl mx-auto px-4 py-3">
-        {/* City filter - scrollable on mobile */}
+        {/* Region filter */}
         <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
-          {cities.map((city) => (
+          {regions.map((r) => (
             <button
-              key={city}
-              onClick={() => onCityChange(city)}
+              key={r}
+              onClick={() => onRegionChange(r)}
               className={`flex-shrink-0 px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
-                selectedCity === city
+                selectedRegion === r
                   ? "bg-purple-600 text-white"
                   : "bg-gray-100 text-gray-600 hover:bg-gray-200"
               }`}
             >
-              {city}
+              {r}
             </button>
           ))}
         </div>

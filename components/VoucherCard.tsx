@@ -7,6 +7,8 @@ interface Props {
 }
 
 export default function VoucherCard({ voucher }: Props) {
+  const isLow = voucher.remaining <= 5;
+
   return (
     <Link href={`/product/${voucher.id}`} className="block group">
       <div className="bg-white rounded-xl overflow-hidden card-shadow border border-gray-100">
@@ -23,21 +25,22 @@ export default function VoucherCard({ voucher }: Props) {
           <div className="absolute top-3 left-3 bg-purple-600 text-white text-xs font-bold px-2 py-1 rounded-md">
             省 {voucher.discountPercent}%
           </div>
-          {/* Sold count */}
-          <div className="absolute bottom-3 right-3 bg-black/60 text-white text-xs px-2 py-1 rounded-full">
-            已售 {voucher.soldCount.toLocaleString()}
+          {/* Remaining / sold */}
+          <div className={`absolute bottom-3 right-3 text-white text-xs px-2 py-1 rounded-full ${
+            isLow ? "bg-red-500" : "bg-black/60"
+          }`}>
+            {isLow ? `⚡ 僅剩 ${voucher.remaining} 張` : `已售 ${voucher.soldCount.toLocaleString()}`}
           </div>
         </div>
 
         {/* Content */}
         <div className="p-4 space-y-2">
-          {/* City tag */}
-          <div className="flex items-center gap-2">
-            <span className="badge bg-purple-50 text-purple-600">{voucher.city}</span>
-            {voucher.tags.slice(0, 2).map((tag) => (
-              <span key={tag} className="badge bg-gray-100 text-gray-500">
-                {tag}
-              </span>
+          {/* Region + tags */}
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="badge bg-purple-50 text-purple-600">{voucher.region}</span>
+            <span className="badge bg-gray-100 text-gray-500">{voucher.city}</span>
+            {voucher.tags.slice(0, 1).map((tag) => (
+              <span key={tag} className="badge bg-gray-100 text-gray-500">{tag}</span>
             ))}
           </div>
 
@@ -46,7 +49,8 @@ export default function VoucherCard({ voucher }: Props) {
             {voucher.title}
           </h3>
 
-          <p className="text-sm text-gray-500 line-clamp-1">{voucher.subtitle}</p>
+          {/* Room type */}
+          <p className="text-xs text-purple-500 font-medium">🛏 {voucher.roomType}</p>
 
           {/* Rating */}
           <div className="flex items-center gap-1 text-sm">
@@ -65,8 +69,10 @@ export default function VoucherCard({ voucher }: Props) {
             </span>
           </div>
 
-          {/* Valid until */}
-          <p className="text-xs text-gray-400">活動期間至 {voucher.validUntil}</p>
+          {/* Activity period */}
+          <p className="text-xs text-gray-400">
+            活動期間：{voucher.validFrom} ~ {voucher.validUntil}
+          </p>
         </div>
       </div>
     </Link>

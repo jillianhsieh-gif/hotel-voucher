@@ -41,7 +41,8 @@ export default function ProductPage({ params }: Props) {
       {/* Title & meta */}
       <div className="space-y-3">
         <div className="flex flex-wrap gap-2">
-          <span className="badge bg-purple-50 text-purple-600">{voucher.city}</span>
+          <span className="badge bg-purple-50 text-purple-600">{voucher.region}</span>
+          <span className="badge bg-gray-100 text-gray-500">{voucher.city}</span>
           {voucher.tags.map((tag) => (
             <span key={tag} className="badge bg-gray-100 text-gray-500">{tag}</span>
           ))}
@@ -50,6 +51,7 @@ export default function ProductPage({ params }: Props) {
         <h1 className="text-xl md:text-2xl font-bold text-gray-800 leading-snug">
           {voucher.title}
         </h1>
+        <p className="text-sm text-purple-500 font-medium">🛏 {voucher.roomType}</p>
         <p className="text-gray-500">{voucher.subtitle}</p>
 
         {/* Rating */}
@@ -82,7 +84,12 @@ export default function ProductPage({ params }: Props) {
         <p className="text-sm text-purple-700 font-medium">
           立省 NT$ {savings.toLocaleString()}！限量優惠，售完為止
         </p>
-        <p className="text-sm text-gray-500">活動期間至 {voucher.validUntil}</p>
+        <div className="flex items-center justify-between text-sm">
+          <span className="text-gray-500">活動期間：{voucher.validFrom} ~ {voucher.validUntil}</span>
+          {voucher.remaining <= 10 && (
+            <span className="text-red-500 font-bold">⚡ 僅剩 {voucher.remaining} 張</span>
+          )}
+        </div>
 
         {/* Buy button — client component */}
         <BuyButton voucherId={voucher.id} />

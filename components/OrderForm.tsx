@@ -130,7 +130,7 @@ export default function OrderForm({ isGuest }: Props) {
         <div className="flex-1 min-w-0">
           <p className="font-medium text-gray-800 text-sm line-clamp-2">{voucher.title}</p>
           <p className="text-purple-600 font-bold mt-1">NT$ {voucher.salePrice.toLocaleString()}</p>
-          <p className="text-xs text-gray-400 mt-0.5">活動期間至 {voucher.validUntil}</p>
+          <p className="text-xs text-gray-400 mt-0.5">活動期間：{voucher.validFrom} ~ {voucher.validUntil}</p>
         </div>
       </div>
 

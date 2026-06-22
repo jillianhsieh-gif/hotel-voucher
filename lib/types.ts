@@ -4,17 +4,23 @@ export interface User {
   token: string;
 }
 
+export type Region = "北部" | "中部" | "南部" | "東部" | "離島";
+
 export interface Voucher {
   id: string;
   title: string;
   subtitle: string;
   city: string;
+  region: Region;
   hotelName: string;
+  roomType: string;
   originalPrice: number;
   salePrice: number;
   discountPercent: number;
   images: string[];
+  validFrom: string;
   validUntil: string;
+  remaining: number;
   soldCount: number;
   rating: number;
   reviewCount: number;
