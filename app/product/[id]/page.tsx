@@ -145,9 +145,23 @@ export default function ProductPage({ params }: Props) {
         <h2 className="text-lg font-bold text-gray-800 border-l-4 border-purple-600 pl-3">
           注意事項
         </h2>
-        <div className="bg-gray-100 rounded-xl p-4 border border-gray-200">
-          <p className="text-gray-400 text-sm italic">
-            此區塊內容由民宿業者於後台上架住宿券時自行設定，每張住宿券的注意事項將依各民宿規定顯示，內容可能包含入退房時間、取消政策、使用限制等。
+        <ul className="space-y-1.5 bg-gray-50 rounded-xl p-4">
+          {[
+            "住宿券使用限制：僅限平日週日～週四使用（不含國定假日、12/31）",
+            "本券所提供之服務內容，限當次使用完畢",
+            "本券屬不記名之有價證券，請妥善保管，遺失、被竊等，恕不掛失補發",
+            "本券不得與飯店其他優惠活動合併使用，詳細優惠內容和最新訊息，請以店家現場公告為準",
+            "本券銷售時已開立收據，使用本券時恕不重複開立",
+          ].map((note, i) => (
+            <li key={i} className="flex items-start gap-2 text-gray-500 text-sm">
+              <span className="text-yellow-500 flex-shrink-0">!</span>
+              {note}
+            </li>
+          ))}
+        </ul>
+        <div className="bg-gray-100 rounded-xl px-4 py-3 border border-gray-200">
+          <p className="text-gray-400 text-xs italic">
+            💡 此區塊內容由民宿業者於後台上架住宿券時自行設定，每張住宿券的注意事項將依各民宿規定顯示，內容可能包含入退房時間、取消政策、使用限制等。
           </p>
         </div>
       </section>
