@@ -124,7 +124,12 @@ export default function ProductPage({ params }: Props) {
           使用方式
         </h2>
         <ol className="space-y-2">
-          {voucher.usageInstructions.map((step, i) => (
+          {[
+            "購買後電子票券將寄至您的 Email",
+            "入住前請向民宿電話預約訂房（注意訂購的時間為住宿券可使用之範圍）",
+            "訂房時請說明當天會使用票券入住",
+            "入住當天出示票券編號給民宿人員核銷",
+          ].map((step, i) => (
             <li key={i} className="flex gap-3 text-gray-600">
               <span className="flex-shrink-0 w-6 h-6 bg-purple-600 text-white text-xs font-bold rounded-full flex items-center justify-center">
                 {i + 1}
@@ -140,14 +145,11 @@ export default function ProductPage({ params }: Props) {
         <h2 className="text-lg font-bold text-gray-800 border-l-4 border-purple-600 pl-3">
           注意事項
         </h2>
-        <ul className="space-y-1.5 bg-gray-50 rounded-xl p-4">
-          {voucher.notes.map((note, i) => (
-            <li key={i} className="flex items-start gap-2 text-gray-500 text-sm">
-              <span className="text-yellow-500 flex-shrink-0">!</span>
-              {note}
-            </li>
-          ))}
-        </ul>
+        <div className="bg-gray-100 rounded-xl p-4 border border-gray-200">
+          <p className="text-gray-400 text-sm italic">
+            此區塊內容由民宿業者於後台上架住宿券時自行設定，每張住宿券的注意事項將依各民宿規定顯示，內容可能包含入退房時間、取消政策、使用限制等。
+          </p>
+        </div>
       </section>
 
       {/* Sticky bottom CTA on mobile */}
